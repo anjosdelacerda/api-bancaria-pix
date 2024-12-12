@@ -5,6 +5,7 @@ export interface IPix {
   id?: string;
   key: string;
   type: PixKeyType;
-  recipient: string;
+  recipient?: string;
+  value: number;
   user: User;
 }

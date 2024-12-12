@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { IsNotEmpty, IsString, IsEnum, IsUUID } from "class-validator";
+import { IsNotEmpty, IsString, IsEnum, IsUUID, Min } from "class-validator";
 import { User } from "./user.entity";
 import { v4 as uuid } from "uuid";
 
@@ -29,6 +29,11 @@ export class Pix {
   @IsNotEmpty({ message: "O destinatário não pode estar vazio." })
   @IsString({ message: "O destinatário deve ser uma string." })
   recipient: string;
+
+  @Column({ type: "float" })
+  @IsNotEmpty({ message: "O valor não pode estar vazio." })
+  @Min(0, { message: "O valor não pode ser menor que 0." })
+  value: number;
 
   @ManyToOne(() => User, (user) => user.pix)
   @IsNotEmpty({ message: "O usuário associado ao Pix não pode estar vazio." })
